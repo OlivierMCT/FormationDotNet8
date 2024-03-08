@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Persistance", "CATo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Business", "CATodos.Business\CATodos.Business.csproj", "{5676EE42-EFED-4346-8058-2D21303740F8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWebApp", "HelloWebApp\HelloWebApp.csproj", "{74F43DC7-8003-4C53-8818-580A6BB4C891}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{5676EE42-EFED-4346-8058-2D21303740F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5676EE42-EFED-4346-8058-2D21303740F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5676EE42-EFED-4346-8058-2D21303740F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74F43DC7-8003-4C53-8818-580A6BB4C891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74F43DC7-8003-4C53-8818-580A6BB4C891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74F43DC7-8003-4C53-8818-580A6BB4C891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74F43DC7-8003-4C53-8818-580A6BB4C891}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

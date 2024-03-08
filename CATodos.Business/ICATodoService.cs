@@ -16,7 +16,7 @@ namespace CATodos.Business {
         Todo CreateTodo(TodoCreate infos);
         Todo UpdateTodo(TodoUpdate infos);
 
-        Todo UpdateCategoriesForTodo(IEnumerable<int> categoryIds);
+        Todo UpdateCategoriesForTodo(int todoId, IEnumerable<int> categoryIds);
 
 
 

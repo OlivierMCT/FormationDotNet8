@@ -144,7 +144,7 @@ namespace CATodos.Business {
 
         public Task<Todo> UpdateTodoAsync(TodoUpdate infos) => Task.FromResult(UpdateTodo(infos));
 
-        public Task<Todo> UpdateCategoriesForTodoAsync(IEnumerable<int> categoryIds) => Task.FromResult(UpdateCategoriesForTodo(categoryIds));
+        public Task<Todo> UpdateCategoriesForTodoAsync(int todoId, IEnumerable<int> categoryIds) => Task.FromResult(UpdateCategoriesForTodo(todoId, categoryIds));
 
         #endregion
     }
