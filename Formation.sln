@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloDotNet8", "HelloDotNet8\HelloDotNet8.csproj", "{589D7136-5978-497F-B59E-9B5AE4D630A8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HElloEF", "HElloEF\HElloEF.csproj", "{99346DEE-4483-46D4-9721-1F94A316F9D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CATodos.Entities", "CATodos.Entities\CATodos.Entities.csproj", "{7E905207-119E-4ACE-94F3-5DCC4FE6EE7E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CATodos.BusinessModels", "CATodos.BusinessModels\CATodos.BusinessModels.csproj", "{D76DC344-0C5E-4CDF-A3DB-545842706F5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Tests", "CATodos.Tests\CATodos.Tests.csproj", "{B167ADBD-B11F-4250-94AE-1F4787CC50B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Persistance", "CATodos.Persistance\CATodos.Persistance.csproj", "{562F5280-131E-40AC-AB66-59CD28470EB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Business", "CATodos.Business\CATodos.Business.csproj", "{5676EE42-EFED-4346-8058-2D21303740F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{589D7136-5978-497F-B59E-9B5AE4D630A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{589D7136-5978-497F-B59E-9B5AE4D630A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{589D7136-5978-497F-B59E-9B5AE4D630A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{589D7136-5978-497F-B59E-9B5AE4D630A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99346DEE-4483-46D4-9721-1F94A316F9D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99346DEE-4483-46D4-9721-1F94A316F9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99346DEE-4483-46D4-9721-1F94A316F9D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99346DEE-4483-46D4-9721-1F94A316F9D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E905207-119E-4ACE-94F3-5DCC4FE6EE7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E905207-119E-4ACE-94F3-5DCC4FE6EE7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E905207-119E-4ACE-94F3-5DCC4FE6EE7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E905207-119E-4ACE-94F3-5DCC4FE6EE7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D76DC344-0C5E-4CDF-A3DB-545842706F5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D76DC344-0C5E-4CDF-A3DB-545842706F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D76DC344-0C5E-4CDF-A3DB-545842706F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D76DC344-0C5E-4CDF-A3DB-545842706F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B167ADBD-B11F-4250-94AE-1F4787CC50B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B167ADBD-B11F-4250-94AE-1F4787CC50B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B167ADBD-B11F-4250-94AE-1F4787CC50B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B167ADBD-B11F-4250-94AE-1F4787CC50B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{562F5280-131E-40AC-AB66-59CD28470EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{562F5280-131E-40AC-AB66-59CD28470EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{562F5280-131E-40AC-AB66-59CD28470EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{562F5280-131E-40AC-AB66-59CD28470EB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5676EE42-EFED-4346-8058-2D21303740F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5676EE42-EFED-4346-8058-2D21303740F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5676EE42-EFED-4346-8058-2D21303740F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5676EE42-EFED-4346-8058-2D21303740F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A695AC30-96AB-488B-8D24-C28F0E8A913E}
+	EndGlobalSection
+EndGlobal
