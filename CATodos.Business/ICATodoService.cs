@@ -33,6 +33,6 @@ namespace CATodos.Business {
         Task<Todo> CreateTodoAsync(TodoCreate infos);
         Task<Todo> UpdateTodoAsync(TodoUpdate infos);
 
-        Task<Todo> UpdateCategoriesForTodoAsync(IEnumerable<int> categoryIds);
+        Task<Todo> UpdateCategoriesForTodoAsync(int todoId, IEnumerable<int> categoryIds);
     }
 }

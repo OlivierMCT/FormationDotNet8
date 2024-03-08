@@ -7,9 +7,10 @@ namespace CATodos.BusinessModels {
 
         public override bool IsValid(object? value) {
             if(value != null && value is DateOnly dateValue) {
-
+                var today = DateOnly.FromDateTime(DateTime.Today);
+                return dateValue > today || ( IncludeToday && dateValue >= today );
             }
             else return true;
         }
-    }S
+    }
 }

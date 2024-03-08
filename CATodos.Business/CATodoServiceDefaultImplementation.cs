@@ -1,11 +1,15 @@
 ﻿
 using CATodos.BusinessModels;
+using CATodos.Entities;
 using CATodos.Persistance;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace CATodos.Business {
     public class CATodoServiceDefaultImplementation(CATodoDbContext context) : ICATodoService {
-        
+
         public IEnumerable<Todo> GetAllTodos() {
             return context.Todos
                 .Include(t => t.Categories)
@@ -25,7 +29,7 @@ namespace CATodos.Business {
             return context.Categories
                 .Include(c => c.Todos)
                 .FirstOrDefault(c => c.Id == categoryId)
-                ?.Todos.Select(t => t.ToTodo()) 
+                ?.Todos.Select(t => t.ToTodo())
                 ?? throw new CATodoException(102, $"la catégorie n°{categoryId} n'existe pas");
         }
 
@@ -53,7 +57,7 @@ namespace CATodos.Business {
 
         public void RemoveTodo(int id) {
             var todo = context.Todos.Find(id) ?? throw new CATodoException(101, $"la tâche n°{id} n'existe pas");
-            if(!todo.IsDeletable()) throw new CATodoException(103, $"la tâche n°{id} n'est pas supprimable");
+            if (!todo.IsDeletable()) throw new CATodoException(103, $"la tâche n°{id} n'est pas supprimable");
             context.Remove(todo);
             context.SaveChanges();
         }
@@ -67,19 +71,55 @@ namespace CATodos.Business {
 
         public Todo CreateTodo(TodoCreate infos) {
             // Vérifier les infos
+            List<ValidationResult> errors = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(infos, new ValidationContext(infos), errors, true) ){
+                throw new CATodoException(104, string.Join(" 🦄 ", errors.Select(err => err.ErrorMessage)));
+            }
             // Créer TodoEntity avec les infos
+            var entity = new TodoEntity() {
+                DueDate = infos.DueDate!.Value,
+                IsDone = false,
+                Latitude = infos.Latitude,
+                Longitude = infos.Longitude,
+                Title = infos.Title!,
+            };
             // .Add && SaveChanges
+            context.Add(entity);
+            context.SaveChanges();
             // transformer en Todo le TodoEntity que l'on vient d'insérer
-
-            throw new NotImplementedException();
+            return entity.ToTodo();
         }
 
         public Todo UpdateTodo(TodoUpdate infos) {
-            throw new NotImplementedException();
+            // Vérifier les infos
+            List<ValidationResult> errors = new List<ValidationResult>();
+            if (!Validator.TryValidateObject(infos, new ValidationContext(infos), errors, true) ){
+                throw new CATodoException(104, string.Join(" 🦄 ", errors.Select(err => err.ErrorMessage)));
+            }
+            var entity = context.Todos
+                .Include(t => t.Categories)
+                .FirstOrDefault(t => t.Id == infos.Id!.Value)
+                ?? throw new CATodoException(101, $"la tâche n°{infos.Id!.Value} n'existe pas");
+            entity.DueDate = infos.DueDate!.Value;
+            entity.Latitude = infos.Latitude;
+            entity.Longitude = infos.Longitude;
+            entity.Title = infos.Title!;
+            context.SaveChanges();
+
+            return entity.ToTodo();
         }
 
-        public Todo UpdateCategoriesForTodo(IEnumerable<int> categoryIds) {
-            throw new NotImplementedException();
+        public Todo UpdateCategoriesForTodo(int todoId, IEnumerable<int> categoryIds) {
+            var entity = context.Todos
+                .Include(t => t.Categories)
+                .FirstOrDefault(t => t.Id == todoId)
+                ?? throw new CATodoException(101, $"la tâche n°{todoId} n'existe pas");
+            var cats = entity.Categories.ToList();
+            cats.RemoveAll(c => !categoryIds.Any(id => id == c.Id));
+            var newCats = categoryIds.Except(cats.Select(c => c.Id)).ToList();
+            cats.AddRange(context.Categories.Where(c => newCats.Contains(c.Id)));
+            context.SaveChanges();
+            return entity.ToTodo();
         }
 
         #region Async Methods
