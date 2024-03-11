@@ -1,7 +1,10 @@
+using CATodos.Api.Formatters;
 using CATodos.Api.Middlewares;
 using CATodos.Business;
 using CATodos.Persistance;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
+using WebApiContrib.Core.Formatter.Csv;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +16,11 @@ builder.Services.AddDbContext<CATodoDbContext>(
         .UseSqlServer(builder.Configuration.GetConnectionString("MyDb"))   
 );
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(config => {
+    config.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+    //config.OutputFormatters.Add(new CsvOutputFormatter(new CsvFormatterOptions() { Encoding = System.Text.Encoding.UTF8, IncludeExcelDelimiterHeader = true, CsvDelimiter = ";"}));
+    config.OutputFormatters.Add(new CsvSerializerOutputFormatter());
+});
 
 var app = builder.Build();
 

@@ -63,6 +63,16 @@ namespace CATodos.Api.Controllers {
             } catch (CATodoException ex) when (ex.Code == 101) { return NotFound(ex.Message); } catch (CATodoException ex) when (ex.Code == 104) { return BadRequest(ex.Message); }
         }
 
+        [HttpPatch, Route("{id}")]
+        public async Task<ActionResult<TodoDetailDto>> PatchOneAsync(int id, TodoPatchDto dto) {
+            try {
+                var updatedTodo = await _todoService.GetTodoAsync(id);
+                if(updatedTodo.IsDone != dto.Done!.Value) 
+                    updatedTodo = await _todoService.ToggleTodoAsync(id);
+                return ToDetailDto(updatedTodo);
+            } catch (CATodoException ex) when (ex.Code == 101) { return NotFound(ex.Message); }
+        }
+
         #region Automapper
         internal static TodosDto ToTodos(IEnumerable<Todo> todos) {
             return new TodosDto() {

@@ -1,4 +1,9 @@
 @CATodos.Api_HostAddress = https://localhost:7155
+GET {{CATodos.Api_HostAddress}}/categorie
+Accept: text/csv
+
+
+###
 
 GET {{CATodos.Api_HostAddress}}/todo
 
@@ -7,7 +12,7 @@ GET {{CATodos.Api_HostAddress}}/todo
 GET {{CATodos.Api_HostAddress}}/todo?q=faire
 
 ###
-GET {{CATodos.Api_HostAddress}}/todo/1
+GET {{CATodos.Api_HostAddress}}/todo/12
 
 ###
 GET {{CATodos.Api_HostAddress}}/todo/400
@@ -38,6 +43,15 @@ Content-Type: application/json
   "latitude": 39,
   "longitude": -1,
   "Categories": [6]
+}
+
+###
+
+PATCH {{CATodos.Api_HostAddress}}/todo/5
+Content-Type: application/json
+
+{
+  "Done": false
 }
 
 ###

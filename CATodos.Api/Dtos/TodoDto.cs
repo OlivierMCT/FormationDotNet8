@@ -51,4 +51,9 @@ namespace CATodos.Api.Dtos {
 
         public List<int>? Categories { get; set; } = new List<int>();
     }
+
+    public record TodoPatchDto {
+        [Required(ErrorMessage = "l'état est obligatoire")]
+        public bool? Done { get; set; } = null!;
+    }
 }
