@@ -49,6 +49,6 @@ namespace CATodos.Api.Dtos {
         [Range(-180, 180, ErrorMessage = "la longitude est invalide")]
         public double? Longitude { get; set; }
 
-        public List<int> Categories { get; set; } = new List<int>();
+        public List<int>? Categories { get; set; } = new List<int>();
     }
 }

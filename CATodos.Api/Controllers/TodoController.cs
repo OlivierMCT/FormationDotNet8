@@ -51,7 +51,7 @@ namespace CATodos.Api.Controllers {
         [HttpPut, Route("{id}")]
         public async Task<ActionResult<TodoDetailDto>> PutOneAsync(int id, TodoPutDto dto) {
             try {
-                await _todoService.UpdateCategoriesForTodoAsync(id, dto.Categories);
+                await _todoService.UpdateCategoriesForTodoAsync(id, dto.Categories ?? new List<int>());
                 var updatedTodo = await _todoService.UpdateTodoAsync(new TodoUpdate() {
                     DueDate = DateOnly.FromDateTime(dto.DueDate!.Value),
                     Latitude = dto.Latitude,
