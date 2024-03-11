@@ -1,0 +1,43 @@
+@CATodos.Api_HostAddress = https://localhost:7155
+
+GET {{CATodos.Api_HostAddress}}/todo
+
+###
+
+GET {{CATodos.Api_HostAddress}}/todo?q=faire
+
+###
+GET {{CATodos.Api_HostAddress}}/todo/1
+
+###
+GET {{CATodos.Api_HostAddress}}/todo/400
+
+###
+Delete {{CATodos.Api_HostAddress}}/todo/2
+
+###
+
+POST {{CATodos.Api_HostAddress}}/todo
+Content-Type: application/json
+
+{
+  "title": "test 1",
+  "dueDate": "2024-05-10",
+  "latitude": 39,
+  "longitude": -1
+}
+
+###
+
+PUT {{CATodos.Api_HostAddress}}/todo/22
+Content-Type: application/json
+
+{
+  "title": "test 1",
+  "dueDate": "2024-05-10",
+  "latitude": 39,
+  "longitude": -1,
+  "Categories": [6]
+}
+
+###

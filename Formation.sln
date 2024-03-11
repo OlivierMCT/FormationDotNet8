@@ -11,13 +11,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CATodos.Entities", "CATodos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CATodos.BusinessModels", "CATodos.BusinessModels\CATodos.BusinessModels.csproj", "{D76DC344-0C5E-4CDF-A3DB-545842706F5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Tests", "CATodos.Tests\CATodos.Tests.csproj", "{B167ADBD-B11F-4250-94AE-1F4787CC50B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CATodos.Tests", "CATodos.Tests\CATodos.Tests.csproj", "{B167ADBD-B11F-4250-94AE-1F4787CC50B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Persistance", "CATodos.Persistance\CATodos.Persistance.csproj", "{562F5280-131E-40AC-AB66-59CD28470EB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CATodos.Persistance", "CATodos.Persistance\CATodos.Persistance.csproj", "{562F5280-131E-40AC-AB66-59CD28470EB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Business", "CATodos.Business\CATodos.Business.csproj", "{5676EE42-EFED-4346-8058-2D21303740F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CATodos.Business", "CATodos.Business\CATodos.Business.csproj", "{5676EE42-EFED-4346-8058-2D21303740F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWebApp", "HelloWebApp\HelloWebApp.csproj", "{74F43DC7-8003-4C53-8818-580A6BB4C891}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWebApp", "HelloWebApp\HelloWebApp.csproj", "{74F43DC7-8003-4C53-8818-580A6BB4C891}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CATodos.Api", "CATodos.Api\CATodos.Api.csproj", "{2E678891-FC98-496B-9F42-10D429E1003E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{74F43DC7-8003-4C53-8818-580A6BB4C891}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74F43DC7-8003-4C53-8818-580A6BB4C891}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74F43DC7-8003-4C53-8818-580A6BB4C891}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E678891-FC98-496B-9F42-10D429E1003E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E678891-FC98-496B-9F42-10D429E1003E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E678891-FC98-496B-9F42-10D429E1003E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E678891-FC98-496B-9F42-10D429E1003E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

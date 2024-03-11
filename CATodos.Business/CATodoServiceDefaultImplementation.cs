@@ -118,6 +118,8 @@ namespace CATodos.Business {
             cats.RemoveAll(c => !categoryIds.Any(id => id == c.Id));
             var newCats = categoryIds.Except(cats.Select(c => c.Id)).ToList();
             cats.AddRange(context.Categories.Where(c => newCats.Contains(c.Id)));
+
+            entity.Categories = cats;
             context.SaveChanges();
             return entity.ToTodo();
         }
