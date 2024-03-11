@@ -8,16 +8,16 @@ namespace HelloWebApp {
     public class ChronoMiddleware {
         private readonly RequestDelegate _next;
 
-        public ChronoMiddleware(RequestDelegate next) {
+        public ChronoMiddleware(RequestDelegate next, IMagicService ms) {
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext httpContext, ILogger<ChronoMiddleware> logger, IConfiguration conf) {
+        public async Task InvokeAsync(HttpContext httpContext, ILogger<ChronoMiddleware> logger, IMagicService ms, IConfiguration conf) {
             var chrono = Stopwatch.StartNew();
             await _next(httpContext);
             chrono.Stop();
 
-            string log = $"Temps d'exécution = {chrono.ElapsedMilliseconds}";
+            string log = $"--/{ms.MagicNumber}/-- Temps d'exécution = {chrono.ElapsedMilliseconds}";
             int sinfo = conf.GetValue<int>("Chrono:Seuils:Info");
 
             var sectionChrono = conf.GetRequiredSection("Chrono");
