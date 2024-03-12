@@ -1,76 +1,60 @@
 ﻿using CATodos.Api.Dtos;
+using CATodos.Api.Filters;
 using CATodos.Business;
 using CATodos.BusinessModels;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace CATodos.Api.Controllers {
-    [ApiController, Route("todo")]
-    public class TodoController : ControllerBase {
-        private readonly ICATodoService _todoService;
-
-        public TodoController(ICATodoService todoService) {
-            _todoService = todoService;
-        }
-
-        [HttpGet]
+    [ApiController, Route("todo"), CATodoExceptionFilter]
+    public class TodoController(ICATodoService todoService) : ControllerBase {
+        [HttpGet, ChronoActionFilter]
         public async Task<TodosDto> GetAllAsync([FromQuery(Name = "q")] string? keyword = null) {
-            return ToTodos(await ((!string.IsNullOrEmpty(keyword)) ? _todoService.SearchTodosAsync(keyword) : _todoService.GetAllTodosAsync()));
+            return ToTodos(await ((!string.IsNullOrEmpty(keyword)) ? todoService.SearchTodosAsync(keyword) : todoService.GetAllTodosAsync()));
         }
 
         [HttpGet, Route("{id:int}", Name = "TodoController_GetOne")]
-        public async Task<ActionResult<TodoDetailDto>> GetOneAsync(int id) {
-            try {
-                return ToDetailDto(await _todoService.GetTodoAsync(id));
-            } catch (CATodoException ex) when (ex.Code == 101) {
-                return NotFound(ex.Message);
-            }
+        public async Task<TodoDetailDto> GetOneAsync(int id) {
+            return ToDetailDto(await todoService.GetTodoAsync(id));
         }
 
-        [HttpDelete, Route("{id:int}")]
+        [HttpDelete, Route("{id:int}"), CAAuthorizationFilter(Applications = "Sandra;OTIC")]
         public async Task<IActionResult> DeleteOneAsync(int id) {
-            try {
-                await _todoService.RemoveTodoAsync(id);
-                return NoContent();
-            } catch (CATodoException ex) when (ex.Code == 101) { return NotFound(ex.Message); } catch (CATodoException ex) when (ex.Code == 103) { return BadRequest(ex.Message); }
+            await todoService.RemoveTodoAsync(id);
+            return NoContent();
         }
 
-        [HttpPost, Route("")]
+        [HttpPost, Route(""), CAAuthorizationFilter]
+        [ProducesResponseType(201), ProducesResponseType(400)]
         public async Task<IActionResult> PostOneAsync(TodoPostDto dto) {
-            try {
-                var newTodo = await _todoService.CreateTodoAsync(new TodoCreate() {
-                    DueDate = DateOnly.FromDateTime(dto.DueDate!.Value),
-                    Latitude = dto.Latitude,
-                    Longitude = dto.Longitude,
-                    Title = dto.Title
-                });
-                return CreatedAtRoute("TodoController_GetOne", new { id = newTodo.Id }, ToDetailDto(newTodo));
-            } catch (CATodoException ex) when (ex.Code == 104) { return BadRequest(ex.Message); }
+            var newTodo = await todoService.CreateTodoAsync(new TodoCreate() {
+                DueDate = DateOnly.FromDateTime(dto.DueDate!.Value),
+                Latitude = dto.Latitude,
+                Longitude = dto.Longitude,
+                Title = dto.Title
+            });
+            return CreatedAtRoute("TodoController_GetOne", new { id = newTodo.Id }, ToDetailDto(newTodo));
         }
 
-        [HttpPut, Route("{id}")]
-        public async Task<ActionResult<TodoDetailDto>> PutOneAsync(int id, TodoPutDto dto) {
-            try {
-                await _todoService.UpdateCategoriesForTodoAsync(id, dto.Categories ?? new List<int>());
-                var updatedTodo = await _todoService.UpdateTodoAsync(new TodoUpdate() {
-                    DueDate = DateOnly.FromDateTime(dto.DueDate!.Value),
-                    Latitude = dto.Latitude,
-                    Longitude = dto.Longitude,
-                    Title = dto.Title,
-                    Id = id
-                });
-                return ToDetailDto(updatedTodo);
-            } catch (CATodoException ex) when (ex.Code == 101) { return NotFound(ex.Message); } catch (CATodoException ex) when (ex.Code == 104) { return BadRequest(ex.Message); }
+        [HttpPut, Route("{id}"), CAAuthorizationFilter]
+        public async Task<TodoDetailDto> PutOneAsync(int id, TodoPutDto dto) {
+            await todoService.UpdateCategoriesForTodoAsync(id, dto.Categories ?? new List<int>());
+            var updatedTodo = await todoService.UpdateTodoAsync(new TodoUpdate() {
+                DueDate = DateOnly.FromDateTime(dto.DueDate!.Value),
+                Latitude = dto.Latitude,
+                Longitude = dto.Longitude,
+                Title = dto.Title,
+                Id = id
+            });
+            return ToDetailDto(updatedTodo);
         }
 
-        [HttpPatch, Route("{id}")]
-        public async Task<ActionResult<TodoDetailDto>> PatchOneAsync(int id, TodoPatchDto dto) {
-            try {
-                var updatedTodo = await _todoService.GetTodoAsync(id);
-                if(updatedTodo.IsDone != dto.Done!.Value) 
-                    updatedTodo = await _todoService.ToggleTodoAsync(id);
-                return ToDetailDto(updatedTodo);
-            } catch (CATodoException ex) when (ex.Code == 101) { return NotFound(ex.Message); }
+        [HttpPatch, Route("{id}"), CAAuthorizationFilter]
+        public async Task<TodoDetailDto> PatchOneAsync(int id, TodoPatchDto dto) {
+            var updatedTodo = await todoService.GetTodoAsync(id);
+            if (updatedTodo.IsDone != dto.Done!.Value)
+                updatedTodo = await todoService.ToggleTodoAsync(id);
+            return ToDetailDto(updatedTodo);
         }
 
         #region Automapper

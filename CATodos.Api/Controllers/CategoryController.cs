@@ -1,10 +1,12 @@
 ﻿using CATodos.Api.Dtos;
+using CATodos.Api.Filters;
 using CATodos.Business;
 using CATodos.BusinessModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace CATodos.Api.Controllers {
-    [Route("categorie")]
+    [Route("category")]
     public class CategoryController : ControllerBase {
         private readonly ICATodoService _todoService;
 
@@ -12,18 +14,15 @@ namespace CATodos.Api.Controllers {
             _todoService = todoService;
         }
 
-        [HttpGet]
-        public IEnumerable<CategoryDto> GetAll() {
+        [HttpGet, ExcelCsvResourceFilter, OutputCache(Duration = 20)]
+        public IEnumerable<CategoryDto> GetAll([FromServices] ILogger<CategoryController> logger) {
+            logger.LogInformation("{}> GetAll Categories Action", DateTime.Now.ToString("T"));
             return _todoService.GetAllCategories().Select(ToDto);
         }
 
-        [HttpGet, Route("{id:int}")]
-        public ActionResult<CategoryDto> GetOne([FromRoute] int id) {
-            try {
-                return ToDto(_todoService.GetCategory(id));
-            }catch(CATodoException ex) when (ex.Code == 102)  {
-                return NotFound(ex.Message);
-            }
+        [HttpGet, Route("{id:int}"), CATodoExceptionFilter]
+        public CategoryDto GetOne([FromRoute] int id) {
+            return ToDto(_todoService.GetCategory(id));
         }
 
         internal static CategoryDto ToDto(Category c) {

@@ -5,7 +5,14 @@ Accept: text/csv
 
 ###
 
+GET {{CATodos.Api_HostAddress}}/categorie/42
+
+
+###
+
 GET {{CATodos.Api_HostAddress}}/todo
+CAAccessKey: DAFB248C-9B37-45D4-AFD3-A99BA386BF29
+#CAAccessKey: D8364D9F-07BC-4060-AE22-9AA0284F690F
 
 ###
 
@@ -19,11 +26,14 @@ GET {{CATodos.Api_HostAddress}}/todo/400
 
 ###
 Delete {{CATodos.Api_HostAddress}}/todo/2
+CAAccessKey: D8364D9F-07BC-4060-AE22-9AA0284F690F
 
 ###
 
 POST {{CATodos.Api_HostAddress}}/todo
 Content-Type: application/json
+CAAccessKey: DAFB248C-9B37-45D4-AFD3-A99BA386BF29
+
 
 {
   "title": "test 1",
